@@ -173,20 +173,20 @@ if(!Array.isArray(slide) || slide.length<=0){
                     return(
                         <HeroSlide key={index}>
                             {index===current && (
-                                            <HeroSlider>
-                                            <HeroImage src={slide.Image} alt={slide.alt}/>
-                                            <HeroContent>
-                                                <h1>{slide.title}</h1>
-                                                <p>{slide.price}</p>
-                                                <Button to={slide.path}
-                                                primary="true" css={`
-                                                max-width: 160px;
-                                                `}>
-                                                    {slide.label}
-                                                    <Arrow/>
-                                                </Button>
-                                            </HeroContent>
-                                            </HeroSlider>
+                            <HeroSlider>
+                                <HeroImage src={slide.Image} alt={slide.alt}/>
+                                <HeroContent>
+                                <h1>{slide.title}</h1>
+                                <p>{slide.price}</p>
+                                <Button to={slide.path} primary="true" 
+                                css={`
+                                    max-width: 160px;
+                                    `}>
+                                {slide.label}
+                                <Arrow/>
+                                </Button>
+                                </HeroContent>
+                                </HeroSlider>
                             )}
                           
                         </HeroSlide>

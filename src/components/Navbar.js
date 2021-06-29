@@ -1,19 +1,24 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import styled,{css} from 'styled-components/macro';
-import {Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Link,Switch,Redirect} from 'react-router-dom'
 import { menuData } from '../data/Menudata';
-import { Button } from './Button';
+import ScrollToTop from './ScrollToTop';
+import ScrollToMiddle from './ScrollToMiddle';
+
+import '../Style/Navbar.css'
+
 //Bars
 
 import Bars from"../images/bars.svg";
+import Blog from '../pages/Blog';
+import Review from '../pages/Review';
+import Home from '../pages/Home';
 
-/*
-import {FaBars} from "react-icons/fa";*/
+
 
 const Nav = styled.nav`
     display:flex;
     height: 60px;
-   // background: red;
     justify-content:space-between;
     padding:1rem 2rem;
     z-index:100;
@@ -25,11 +30,12 @@ const NavLink=css`
     color:#fff;
     display:flex;
     align-items:center;
-    padding:0 2.5rem;
+    padding:0 1.5rem 0  ;
     height:100%;
     cursor:pointer;
     text-decoration:none;
 `
+
 
 const Logo=styled(Link)`
     ${NavLink}
@@ -58,7 +64,8 @@ display: none;
 const NavMenu=styled.div`
     display:flex;
     align-items:center;
-    margin-right: -48px;
+    
+    margin-left: 16%;
 
     @media screen and (max-width:768px){
         display: none;
@@ -72,32 +79,69 @@ ${NavLink}`;
 const NavBtn=styled.div`
 display:flex;
 align-items:center;
-margin-right:24px;
+margin-left: 1%;
+
 
 @media screen and (max-width:768px){
         display: none;
     }
 `;
 
-function Navbar() {
+function Navbar(props) {
+
     return (
+        <Router>
         <div>
-            <Nav>
-                <Logo to="/dd">Indoor</Logo>
-                <MenuBars />
+
+            <Nav id="navbar">
+                <Logo to="/home">Indoor</Logo>
+                <MenuBars onClick={props.toggle}/>
                 <NavMenu>
+
+                    <Redirect to="/home" />
+
                     {menuData.map((item,index)=>(
-                        <NavMenuLinks to={item.link} key={index}>
+                            
+                     <NavMenuLinks exact activeClassname="active" to={item.link} key={index}>
                         {item.title}
                         </NavMenuLinks>
                     ))}
                 </NavMenu>
+               
                 <NavBtn>
-                    <Button to='/contact' primary="true">Contact Us</Button>
+                    <button className="acc-btn" onClick={()=>props.popupaccount(true)} >Account</button>
                 </NavBtn>
+              
             </Nav>
-        </div>
+            <ScrollToTop/>
+            <Switch>
+                <Route exact path="/home"  component={Home}/>
+                <Route path="/Review"  component={Review}/>
+                <Route path="/Blog"  component={Blog}/>
+             </Switch>
+             </div>
+    </Router>
+           
+         
+           
+
+ 
+  
     )
+    
 }
+
+
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+
+    document.getElementById("navbar").style.backgroundColor = "orange";
+  } else {
+    document.getElementById("navbar").style.backgroundColor = "";
+  }
+}
+
+
 
 export default Navbar
