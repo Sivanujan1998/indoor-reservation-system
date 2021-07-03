@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import styled from 'styled-components'
 import { menuData } from '../data/Menudata'
 import Blog from '../pages/Blog'
@@ -9,6 +9,7 @@ import {Link, Router, Route , Switch} from 'react-router-dom'
 import {FaTimes} from 'react-icons/fa'
 import '../Style/Navbar.css'  
 import ScrollToTop from './ScrollToTop'
+import { loginstateglobal } from '../App';
 
 
 const Dropdowncontainer=styled.div`
@@ -76,6 +77,7 @@ justify-content: center;
 `;
 
 function Dropdown(props){
+    const loginContext=useContext(loginstateglobal)
     return(
     
 
@@ -93,8 +95,13 @@ function Dropdown(props){
                        </DropdownLink>
                    ))}
                </DropdownMenu>
-               <Btnwrap>
-               <button className="acc-btn" onClick={()=>props.popupaccount(true)} >Account</button>
+               <Btnwrap>{
+                    (loginContext.login)?
+                   <button className="acc-btn" onClick={()=>props.popupaccount(true)} >{ loginContext.user.email  }</button>
+                   :  <button className="acc-btn" onClick={()=>props.popupaccount(true)} >Account</button>
+                    
+                }
+             
                </Btnwrap>
            </DropDownWrapper>
 

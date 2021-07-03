@@ -13,6 +13,7 @@ export const Infodataone={
     image:Imagefive,
     reverse:false,
     delay:100,
+    path:'/court',
     position:true
 }
 export const Infodatatwo={
@@ -23,6 +24,7 @@ export const Infodatatwo={
     image:Imagesix,
     reverse:false,
     delay:100,
+    path:'/court',
     position:false
 }
 export const Infodatathree={
@@ -33,6 +35,7 @@ export const Infodatathree={
     image:Imageseven,
     reverse:false,
     delay:100,
+    path:'/court',
     position:true
 }
 export const Infodatafour={
@@ -43,5 +46,6 @@ export const Infodatafour={
     image:Imageeight,
     reverse:false,
     delay:100,
+    path:'/court',
     position:false
 }

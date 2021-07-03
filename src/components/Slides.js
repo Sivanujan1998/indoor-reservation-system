@@ -3,6 +3,8 @@ import styled,{css} from 'styled-components/macro'
 import { Button } from './Button';
 import {IoMdArrowRoundForward} from 'react-icons/io';
 import { IoArrowForward,IoArrowBack } from 'react-icons/io5';
+import Court from '../pages/Court';
+import { Router, Route, Link,Switch,Redirect} from 'react-router-dom'
 
 const Slidesection=styled.section`
 height:100vh;
@@ -166,7 +168,7 @@ if(!Array.isArray(slide) || slide.length<=0){
 }
 
     return (
-       
+  
             <Slidesection>
                 <Slidewrapper>
                 {slide.map((slide,index)=>{
@@ -176,17 +178,27 @@ if(!Array.isArray(slide) || slide.length<=0){
                             <HeroSlider>
                                 <HeroImage src={slide.Image} alt={slide.alt}/>
                                 <HeroContent>
+                               
                                 <h1>{slide.title}</h1>
                                 <p>{slide.price}</p>
+                               
+                            
                                 <Button to={slide.path} primary="true" 
                                 css={`
                                     max-width: 160px;
                                     `}>
                                 {slide.label}
                                 <Arrow/>
+                               
+                                <Switch>
+                <Route  path="/court"  component={Court}/>
+                                 </Switch>
+                                                 
                                 </Button>
+                
                                 </HeroContent>
                                 </HeroSlider>
+                                
                             )}
                           
                         </HeroSlide>
@@ -198,6 +210,7 @@ if(!Array.isArray(slide) || slide.length<=0){
                 </SliderButton>
                 </Slidewrapper>
             </Slidesection>
+    
       
     );
 };

@@ -8,7 +8,7 @@ import ImageFour from "../images/img4.jpg"
 export const SliderData=[{
     title:"Luxuary Villa in Bali, Indonesia",
     price: "$4,000,0000",
-    path:'/homes',
+    path:'/court',
     label:'View home',
     Image:ImageOne,
     alt:"House"
@@ -17,7 +17,7 @@ export const SliderData=[{
 {
     title:"Luxuary Villa in Bali, Indonesia",
     price: "$4,000,0000",
-    path:'/homes',
+    path:'/court',
     label:'View home',
     Image:ImageTwo,
     alt:"House"
@@ -26,7 +26,7 @@ export const SliderData=[{
 {
     title:"Luxuary Villa in Bali, Indonesia",
     price: "$4,000,0000",
-    path:'/homes',
+    path:'/court',
     label:'View home',
     Image:ImageThree,
     alt:"House"
@@ -35,7 +35,7 @@ export const SliderData=[{
 {
     title:"Luxuary Villa in Bali, Indonesia",
     price: "$4,000,0000",
-    path:'/homes',
+    path:'/court',
     label:'View home',
     Image:ImageFour,
     alt:"House"

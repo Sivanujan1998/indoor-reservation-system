@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useContext} from 'react';
 import styled,{css} from 'styled-components/macro';
 import {BrowserRouter as Router, Route, Link,Switch,Redirect} from 'react-router-dom'
 import { menuData } from '../data/Menudata';
@@ -13,6 +13,7 @@ import Bars from"../images/bars.svg";
 import Blog from '../pages/Blog';
 import Review from '../pages/Review';
 import Home from '../pages/Home';
+import { loginstateglobal } from '../App';
 
 
 
@@ -88,7 +89,7 @@ margin-left: 1%;
 `;
 
 function Navbar(props) {
-
+    const loginContext=useContext(loginstateglobal)
     return (
         <Router>
         <div>
@@ -102,15 +103,22 @@ function Navbar(props) {
 
                     {menuData.map((item,index)=>(
                             
-                     <NavMenuLinks exact activeClassname="active" to={item.link} key={index}>
+                     <NavMenuLinks  to={item.link} key={index}>
                         {item.title}
                         </NavMenuLinks>
                     ))}
                 </NavMenu>
                
                 <NavBtn>
-                    <button className="acc-btn" onClick={()=>props.popupaccount(true)} >Account</button>
+                {
+                   (loginContext.login)?
+                   <button className="acc-btn" onClick={()=>props.popupaccount(true)} >{ loginContext.user.email  }</button>
+                   :<button className="acc-btn" onClick={()=>props.popupaccount(true)} >Account</button>
+                    
+                }
+                   
                 </NavBtn>
+            
               
             </Nav>
             <ScrollToTop/>

@@ -77,6 +77,7 @@ const InfoSection = ({
     buttonlabel,
     reverse,
     image,
+    path,
     position
 }
 ) => {
@@ -87,7 +88,7 @@ const InfoSection = ({
                 <h1>{heading}</h1>
                 <p>{paraone}</p>
                 <p>{paratwo}</p>
-                <Button to="/home" primary="true">{buttonlabel}</Button>
+                <Button to={path} primary="true">{buttonlabel}</Button>
                 </Columnleft>
                 <Columnright reverse={reverse}>
                 <img src={image} alt="home"/>
