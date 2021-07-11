@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+}
+.review{
+    padding-top: 10%;
+}
+.textarea{
+display: flex;
+justify-content: center;
+width:60%;
+padding-left: 1rem;
+padding-top: 1rem;
+
+}
+
+.submit{
+   margin-top: 5px;
+}
+
+.feedback{
+    width:100%;
+    height: 500px;
+}
+.reviewintro{
+    padding-top: 90px;
+}
+.startintro{
+    margin-top: -100px;
+}
+.commentbox{
+    margin-top: -10px;
+}

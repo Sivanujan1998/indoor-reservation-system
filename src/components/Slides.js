@@ -1,10 +1,15 @@
-import React,{useEffect,useState,useRef} from 'react'
+import React,{useEffect,useState,useRef,useContext} from 'react'
 import styled,{css} from 'styled-components/macro'
 import { Button } from './Button';
 import {IoMdArrowRoundForward} from 'react-icons/io';
 import { IoArrowForward,IoArrowBack } from 'react-icons/io5';
 import Court from '../pages/Court';
-import { Router, Route, Link,Switch,Redirect} from 'react-router-dom'
+import { Router, Route, Link,Switch,Redirect,BrowserRouter} from 'react-router-dom'
+import App, { loginstateglobal } from '../App';
+import "../Style/Button.css"
+import "../Style/Navbar.css"
+import Home from '../pages/Home';
+import { Component } from 'react';
 
 const Slidesection=styled.section`
 height:100vh;
@@ -126,9 +131,10 @@ ${arrowButtons}`;
 
 
 
-function Slides({slide}) {
+function Slides(props) {
+    const loginContext=useContext(loginstateglobal)
 const[current,setcurrent]=useState(0)
-const len=slide.length;
+const len=props.slide.length;
 const timeout=useRef(null);
 
 useEffect(() => {
@@ -138,6 +144,8 @@ useEffect(() => {
     }
 
     timeout.current=setTimeout(nextSlidehandle,4000)
+
+
 
     return function(){
         if(timeout.current){
@@ -163,15 +171,29 @@ const backSlidehandle=()=>{
     setcurrent(current===0 ?len-1: current-1);
     //console.log(current)
 }
-if(!Array.isArray(slide) || slide.length<=0){
+if(!Array.isArray(props.slide) || props.slide.length<=0){
     return null
 }
 
-    return (
+const courthandle=()=>{
+    if(loginContext.login){
+    loginContext.setcourt(true)
   
+}
+    else{
+    loginContext.setpopup(true)
+    
+    }
+}
+
+
+
+    return (   
+
             <Slidesection>
+             
                 <Slidewrapper>
-                {slide.map((slide,index)=>{
+                {props.slide.map((slide,index)=>{
                     return(
                         <HeroSlide key={index}>
                             {index===current && (
@@ -181,20 +203,16 @@ if(!Array.isArray(slide) || slide.length<=0){
                                
                                 <h1>{slide.title}</h1>
                                 <p>{slide.price}</p>
-                               
-                            
-                                <Button to={slide.path} primary="true" 
-                                css={`
-                                    max-width: 160px;
-                                    `}>
-                                {slide.label}
-                                <Arrow/>
-                               
-                                <Switch>
-                <Route  path="/court"  component={Court}/>
-                                 </Switch>
-                                                 
-                                </Button>
+                                
+                                   <Button onClick={courthandle}  primary="true" 
+                                   css={`
+                                       max-width: 160px;
+                                       `}>
+                                   {slide.label}
+                                   <Arrow/>          
+                                   </Button> 
+                                 
+                    
                 
                                 </HeroContent>
                                 </HeroSlider>
@@ -205,12 +223,19 @@ if(!Array.isArray(slide) || slide.length<=0){
                     );
                 })}
                 <SliderButton>
+                    
                     <PrevArrow onClick={backSlidehandle}/>
                     <NextArrow onClick={nextSlidehandle}/>
                 </SliderButton>
+              
                 </Slidewrapper>
+              
+                            
+               
             </Slidesection>
-    
+          
+   
+          
       
     );
 };

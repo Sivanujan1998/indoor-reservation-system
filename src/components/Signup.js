@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import Radio from '@material-ui/core/Radio';
@@ -9,8 +9,12 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import usePlayerInput from './Hooks/usePlayerinput';
 import Playerservice from '../Services/Playerservice';
+import { loginstateglobal } from '../App';
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const Signup=()=>{
+    const loginContext=useContext(loginstateglobal)
     const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
@@ -25,10 +29,35 @@ const Signup=()=>{
 
     const submithandler=e=>{
         e.preventDefault()
-       let player={email,gender,name,password,phonenumber}
-       Playerservice.createplayer(player).then(alert("Account Sucessfully created!! ")).catch(er=>alert(er))
-     
-    }
+        if(password===password2){
+const allemails=[]
+
+        Playerservice.getplayers().
+        then( 
+           r=>{
+           for (var i = 0; i < r.data.length; i++) 
+           {
+               allemails.push(r.data[i].email)
+              
+           }
+           for(var j=0;j<r.data.length;j++){
+              if(allemails.includes(email)){
+                NotificationManager.error('This Email address Already added', 'Try Again!', 1000, () => {});
+                break
+              }else{
+                let player={email,gender,name,password,phonenumber}
+                Playerservice.createplayer(player).then(
+                 loginContext.setpopup(false), 
+             
+                  alert("Account Sucessfully created!! "),
+                ).catch(er=>alert(er))
+                break
+              } 
+           }
+        }
+           )
+   .catch(er=>NotificationManager.error(er, 'Try Again!', 1000, () => {})) 
+    }else{ NotificationManager.error('Passwords', 'Try Again!', 1000, () => {});}}
     return (
         <Grid>
             <Paper style={paperStyle}>
@@ -56,13 +85,13 @@ const Signup=()=>{
                     <TextField fullWidth label='Password' type='password' placeholder="Enter your password" {...bindpassword}required/>
                     <TextField fullWidth label='Confirm Password' type='password' placeholder="Confirm your password" {...bindpassword2} required/>
                     <FormControlLabel 
-                        control={<Checkbox name="checkedA" />}
+                        control={<Checkbox name="checkedA" required/>}
                         label="I accept the terms and conditions."
                     />
                    
                     <Button type='submit' variant='contained' color='primary'>Sign up</Button>
                 </form>
-            </Paper>
+            </Paper><NotificationContainer/>
         </Grid>
     )
 }

@@ -1,15 +1,23 @@
 import React,{useContext} from 'react'
 import styled from 'styled-components'
 import { menuData } from '../data/Menudata'
-import Blog from '../pages/Blog'
-import Review from '../pages/Review'
-import Home from '../pages/Home'
+import {RiAccountCircleLine} from "react-icons/ri"
+import {BrowserRouter as Router, Route, Link,Switch,Redirect} from 'react-router-dom'
+import "../Style/Navbar.css"
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
-import {Link, Router, Route , Switch} from 'react-router-dom'
 import {FaTimes} from 'react-icons/fa'
-import '../Style/Navbar.css'  
+import '../Style/Button.css'  
 import ScrollToTop from './ScrollToTop'
 import { loginstateglobal } from '../App';
+import Home from '../pages/Home'
+import Review from '../pages/Review'
+import Blog from '../pages/Blog'
+import Navbar from './Navbar'
+import Routing from './Routing'
 
 
 const Dropdowncontainer=styled.div`
@@ -79,10 +87,8 @@ justify-content: center;
 function Dropdown(props){
     const loginContext=useContext(loginstateglobal)
     return(
-    
-
+<Router>
        <div>
-
        <Dropdowncontainer isopen={props.isopen} onClick={props.toggle}>
    <Icon onClick={props.toggle}>
                <CloseIcon/>
@@ -97,7 +103,25 @@ function Dropdown(props){
                </DropdownMenu>
                <Btnwrap>{
                     (loginContext.login)?
-                   <button className="acc-btn" onClick={()=>props.popupaccount(true)} >{ loginContext.user.email  }</button>
+                    <Popup  trigger={<button className="acc-btn" ><RiAccountCircleLine size={25} />{ loginContext.user.name}</button>} position="right"> 
+                    <div ><div className="iconpersonal2">
+                    <center><RiAccountCircleLine size={25} /></center>
+                        <h1>Hi {loginContext.user.name}.. </h1>
+                        <h3>Email:-{loginContext.user.email}</h3>
+                        <h3>Tel-No:-{loginContext.user.phonenumber}</h3>
+                        <h3>Gender:-{loginContext.user.gender}</h3>
+                       
+  
+                      <center>  <button onClick={()=>{
+                            loginContext.setlogin(false)
+                            loginContext.setcourt(false)
+                            loginContext.setuser({})
+                            loginContext.setemail([])
+                            NotificationManager.success('Logout Process', 'Sucessfully Done');
+                        }}>Logout</button></center>
+                        </div>
+                    </div>
+                    </Popup>
                    :  <button className="acc-btn" onClick={()=>props.popupaccount(true)} >Account</button>
                     
                 }
@@ -105,13 +129,14 @@ function Dropdown(props){
                </Btnwrap>
            </DropDownWrapper>
 
-       
+       <NotificationContainer/>
        </Dropdowncontainer>
-  
 
-       
+      {/* <Routing/>*/}
    
         </div>
+
+    </Router>
      
     )
 }

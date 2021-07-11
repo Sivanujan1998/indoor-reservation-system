@@ -1,7 +1,8 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import styled from 'styled-components'
 import { Button } from './Button';
-
+import { loginstateglobal } from '../App';
+import "../Style/Booknow.css"
 const Section=styled.section`
 width: 100%;
 height: 100%;
@@ -14,25 +15,28 @@ const Container=styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr;
 grid-template-rows: 800px;
-
+margin-top: -15%;
 @media screen and (max-width:768px){
     grid-template-columns: 1fr;
+    margin-top: -30%;
 }
 `;
 
 const Columnleft=styled.div`
+order: ${({reverse})=>(reverse ? '2':'1')};
 display:flex;
 flex-direction:column;
 justify-content: center;
 align-items: flex-start;
 line-height: 1.4;
-padding: 0rem 2rem;
+padding: 0rem 1rem 0rem 1rem;
 transition: 0.4s;
+float: left;
 
 &:hover{
     transform: translateY(20px);
 }
-order: ${({reverse})=>(reverse ? '2':'1')};
+
 
 h1{
     margin-bottom: 1rem;
@@ -43,9 +47,10 @@ p{
 }
 `;
 const Columnright=styled.div`
-padding: 0rem;
+order: ${({reverse})=>(reverse ? '':'2')};
+padding: 1rem;
 float: right;
-order: ${({reverse})=>(reverse ? '1':'2')};
+padding: 1rem ;
 display:flex;
 justify-content: center;
 align-items: center;
@@ -81,19 +86,25 @@ const InfoSection = ({
     position
 }
 ) => {
+    const loginContext=useContext(loginstateglobal)
     return (
-        <Section>
+        <Section><div className="bookingcontent">
             <Container>
-                <Columnleft>
+                <Columnleft><div className="detailsgame">
                 <h1>{heading}</h1>
                 <p>{paraone}</p>
                 <p>{paratwo}</p>
-                <Button to={path} primary="true">{buttonlabel}</Button>
+                <Button onClick={()=>{
+                       (loginContext.login)?
+                       loginContext.setcourt(true):
+                        loginContext.setpopup(true)
+                        
+                }} primary="true">{buttonlabel}</Button></div>
                 </Columnleft>
                 <Columnright reverse={reverse}>
                 <img src={image} alt="home"/>
                 </Columnright>
-            </Container>
+            </Container></div>
         </Section>
     )
 }

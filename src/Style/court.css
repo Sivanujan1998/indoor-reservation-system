@@ -3,8 +3,14 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    
+    
   }
-
+ 
+.court{
+  padding-top:110px;
+  
+}
 .squrea1,.squreb1,.squrea2,.squreb2{
     height: 18rem;
     width: 22rem;
@@ -42,8 +48,6 @@
  text-align: center;  
 margin-left: 40%;
 margin-top: 25%;
-
-  
 }
 
 
@@ -132,12 +136,18 @@ margin-top: 25%;
     transform: translateY(5PX);
 
   }
+  .pay{
+    padding: 2rem;
+    margin-top: 5rem;
+  }
   .acc-btn{
+
     background:#000d1a;
     white-space: nowrap;
     outline: none;
     border: none;
     min-width: 80px;
+    position: relative;
     max-width: 150px;
     cursor:pointer;
     text-decoration: none;
@@ -174,3 +184,11 @@ margin-top: 25%;
       border:20px solid #4099ff;
     }
     
+    .paypal{
+  align-content: center;
+    }
+
+    DateTimePicker{
+padding-bottom: 15px;
+background-color: orange;
+    }

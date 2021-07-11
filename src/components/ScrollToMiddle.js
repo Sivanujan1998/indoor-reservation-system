@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
-function ScrollToTop({ history }) {
+function Scrolltomiddle({ history }) {
   useEffect(() => {
     const unlisten = history.listen(() => {
-      window.scrollTo(500, 0);
+      window.scrollTo(0, 650);
     });
     return () => {
       unlisten();
@@ -14,4 +14,4 @@ function ScrollToTop({ history }) {
   return (null);
 }
 
-export default withRouter(ScrollToTop);
+export default withRouter(Scrolltomiddle);

@@ -6,39 +6,39 @@ import ImageFour from "../images/img4.jpg"
 
 
 export const SliderData=[{
-    title:"Luxuary Villa in Bali, Indonesia",
-    price: "$4,000,0000",
+    title:"RESERVE YOUR TIME FOR TABLETENNIS, TODAY",
+    price: "Sigles-LKR 300/Hour, Doubles-LKR 200/Hour",
     path:'/court',
-    label:'View home',
+    label:'Book Court',
     Image:ImageOne,
-    alt:"House"
+    alt:"court"
 
 },
 {
-    title:"Luxuary Villa in Bali, Indonesia",
-    price: "$4,000,0000",
+    title:"RESERVE YOUR TIME FOR TENNIS, TODAY",
+    price: "Sigles-LKR 400/Hour, Doubles-LKR 300/Hour",
     path:'/court',
-    label:'View home',
+    label:'Book Court',
     Image:ImageTwo,
-    alt:"House"
+    alt:"court"
 
 },
 {
-    title:"Luxuary Villa in Bali, Indonesia",
-    price: "$4,000,0000",
+    title:"RESERVE YOUR TIME FOR BADMINTON, TODAY",
+    price: "Sigles-LKR 350/Hour, Doubles-LKR 200/Hour",
     path:'/court',
-    label:'View home',
+    label:'Book Court',
     Image:ImageThree,
-    alt:"House"
+    alt:"court"
 
 },
 {
-    title:"Luxuary Villa in Bali, Indonesia",
-    price: "$4,000,0000",
+    title:"BOOK YOUR GYM TIME,TODAY",
+    price: "LKR 200/Hour",
     path:'/court',
-    label:'View home',
+    label:'Book Court',
     Image:ImageFour,
-    alt:"House"
+    alt:"court"
 
 },
 

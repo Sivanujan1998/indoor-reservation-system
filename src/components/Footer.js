@@ -12,7 +12,8 @@ function Footer() {
                 <div className="container">
                     <div className="sec aboutus">
                         <h2>About Us</h2>
-                        <p>Keep in mind that a "modal window" overlays on either the primary window or another modal window. Windows under a modal are inert. That is, users cannot interact with content outside an active modal window. This might create conflicting behaviors.</p>
+                        <p>Book courts 24/7 online
+With online reservation software you can easily let members (or non-members) make reservations for tennis courts, Badminton courts, TableTennis courts and Gym online at any time. </p>
                    
                     <ul className="sci">
                         <li><a href="#"><FaTwitter /></a></li>
@@ -38,13 +39,14 @@ function Footer() {
                         <ul class="info">
                             <li>
                             <span> <FaMap /></span>
-                            <span>647  shshsh street<br/>
-                            bssbsb sssjsjsjs sssss<br/>
-                            USA </span>
+                            <span>No-135/3 Nelliady<br/>
+                            Cross plant Road,North<br/>
+                            Srilanka </span>
                             </li>
                             <li>
                             <span> <FaPhone /></span>
-                            <p>07756985555</p>
+                            <p>+94779126840, </p>
+                            <p>+94779126820</p>
                             </li>
                             <li>
                             <span> <FaEnvelope /></span>
@@ -55,7 +57,7 @@ function Footer() {
                 </div>
             </footer>
             <div className="copyrightText">
-                <p>Copyright c 2020 online tutorial All Right Reserved </p>
+                <p>Copyright &copy; 2021 <i>PLAY<sub>24/7</sub></i> Club All Right Reserved </p>
                 </div>
         </div>
     )

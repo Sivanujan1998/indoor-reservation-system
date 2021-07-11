@@ -1,0 +1,18 @@
+.detailsgame{
+    background: rgba(255, 251, 0, 0.233);
+    padding: 25px 25px 25px 25px;
+}
+.intocontent{
+    padding: 5% 8% 5% 8%;
+}
+.bookingcontent{
+    margin-top: 4%;
+}
+.intocontent{
+   color:rgb(255, 166, 0);
+   font-weight: bolder;
+   border: orange;
+   text-shadow: 0px 1px #ff0000;
+   font-size: 25px;
+   
+}

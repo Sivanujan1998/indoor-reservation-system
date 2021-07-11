@@ -1,30 +1,90 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import Footer from "../components/Footer";
-function Review() {
-  const { name } = useParams();
-  return (
+import React, { useState,useEffect ,useContext} from "react";
+import { FaStar } from "react-icons/fa";
+import { Container, Radio, Rating } from "../Style/RatingStyles";
+import { loginstateglobal } from "../App";
+import Frame, { useFrame } from 'react-frame-component';
+import Feedback from "../components/Feedback"
+import useReview from "../components/Hooks/useReview";
+import Reviewservice from "../Services/Reviewservice";
+import "../Style/Review.css"
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+ 
+
+const Review = () => {
+  const[comment,bindcomment,resetcomment]=useReview('');
+  const loginContext=useContext(loginstateglobal)
+  const [rate, setRate] = useState(0);
+ 
+ 
+
+
+const submithandler=(e)=>{
+  e.preventDefault();
+
+  var name=loginContext.user.name
+
+
+  var review={comment,name,rate}
+  Reviewservice.createreview(review).then(
+    NotificationManager.success('Review Added', 'Sucessfully!'),
+ setRate(0),
+resetcomment(),
+
+  ).catch(er=>alert(er))
+  }
+
+
+
+
+  return (<>
+   
+    <div className="reviewintro"><h1>Rate our service here...</h1>
+    <Container className="startintro">
+      {[...Array(5)].map((item, index) => {
+        const givenRating = index + 1;
+        return (
+          <label>
+            <Radio
+              type="radio"
+              value={givenRating}
+              onClick={() => {
+                 
+                  setRate(givenRating)
+                  NotificationManager.info(`Are you sure you want to give ${givenRating} stars ?`);
+              }}
+            />
+            <Rating>
+              <FaStar
+                color={
+                  givenRating < rate || givenRating === rate
+                    ? "#FFD700"
+                    : "rgb(192,192,192)"
+                }
+              />
+            </Rating>
+          </label>
+        );
+      })}
+
+    </Container></div>
+    <div className="commentbox">
+    <form onSubmit={submithandler}>
     <div>
-      <h1 className="title is-1">This is the Review Page</h1>
-      <article className="message is-dark" style={{ marginTop: 40 }}>
-        <div className="message-header">
-          <p>Review</p>
-        </div>
-        <div className="message-body">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-          <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta
-          nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida
-          purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac{" "}
-          <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
-          sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi
-          magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales
-          sem.
-        </div>
-      </article>
-      <Footer/>
+    <center><textarea className="textarea" rows='6' placeholder="write your Feedback Here.." {...bindcomment}  required></textarea></center>
+    <center><input type="submit"  className="submit"/></center><br/>
     </div>
-  );
+  </form>
+  </div>
+
+  <Frame className='feedback' >
+    <Feedback value={comment} />
+  </Frame>
+  <NotificationContainer/>
+  </>
+  )
+  
+  
 };
-
-
-export default Review
+  
+export default Review;
